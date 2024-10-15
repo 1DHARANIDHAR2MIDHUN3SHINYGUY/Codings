@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      Scanner S=new Scanner(System.in);
+      int a=99;
+      int b=a;
+      int sum=0;
+      while(b>0 || sum>9)
+      {
+        if(b == 0)
+        {
+          b=sum;
+          sum=0;
+          
+        }
+        int r=b%10;
+        sum+=r;
+        b/=10;
+      }
+      System.out.println(sum);
+  }
+}
