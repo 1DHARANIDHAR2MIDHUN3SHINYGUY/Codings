@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Main {
+    public static int[] plusOne(int[] digits) {
+        int n = digits.length;
+        // Traverse the array from the last digit
+        for (int i = n - 1; i >= 0; i--) {
+            if (digits[i]+1 < 10) {
+                // If the digit is less than 9, just increment it and return
+                digits[i]++;
+                return digits;
+            }
+            // If the digit is 9, set it to 0 and continue the loop to handle the carry
+            digits[i] = 0;
+        }
+        
+        // If all digits are 9, we need an additional digit at the front
+        int[] newNumber = new int[n + 1];
+        newNumber[0] = 1; // First digit is 1, rest will be 0
+        return newNumber;
+    }
+
+    public static void main(String[] args) {
+        int[] digits = {1, 2, 3};
+        System.out.println("Original digits: " + Arrays.toString(digits));
+        
+        int[] result = plusOne(digits);
+        System.out.println("Result after plus one: " + Arrays.toString(result));
+    }
+}
