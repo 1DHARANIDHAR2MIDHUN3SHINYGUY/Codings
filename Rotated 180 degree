@@ -1,0 +1,78 @@
+import java.util.*;
+
+public class Main {
+    // public static boolean isValid(int num) {
+    //     int rotated = 0;
+    //     int original = num;
+    //     int placeValue = 1;
+        
+    //     while (num > 0) {
+    //         int digit = num % 10; 
+            
+            
+    //         if (digit == 0 || digit == 1 || digit == 8) {
+    //             rotated += digit * placeValue;
+    //         } else if (digit == 6) {
+    //             rotated += 9 * placeValue;
+    //         } else if (digit == 9) {
+    //             rotated += 6 * placeValue;
+    //         } else {
+                
+    //             return false;
+    //         }
+            
+    //         num /= 10; 
+    //         placeValue *= 10; 
+    //     }
+    //     int v=0;
+    //     while(rotated>0)
+    //     {
+    //       int r=rotated%10;
+    //       v=v*10+r;
+    //       rotated=rotated/10;
+    //     }
+        
+        
+    //     return v == original;
+    // }
+    // public static void main(String[] args) {
+    //     Scanner scanner = new Scanner(System.in);
+    //     int n = scanner.nextInt();
+    //     if (isValid(n)) {
+    //         System.out.println(n + " is valid");
+    //     } else {
+    //         System.out.println(n + " is not valid");
+    //     }
+    // }
+  
+    public static boolean isValid(String num) {
+        StringBuilder rotated = new StringBuilder();
+        for (int i = num.length() - 1; i >= 0; i--) 
+        {
+            char ch = num.charAt(i);
+            if (ch == '0' || ch == '1' || ch == '8') {
+                rotated.append(ch);
+            } else if (ch == '6') {
+                rotated.append('9');
+            } else if (ch == '9') {
+                rotated.append('6');
+            } else {
+                return false;
+            }
+        }
+        String result=rotated.toString();
+        return result.equals(num);
+        
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String n = scanner.nextLine();
+        if (isValid(n)) {
+            System.out.println(n + " is valid ");
+        } else {
+            System.out.println(n + " is NOT valid ");
+        }
+        // int s=(int)Math.pow(10,n-1);
+        // int e=(int)Math.pow(10,n);
+    }
+}
