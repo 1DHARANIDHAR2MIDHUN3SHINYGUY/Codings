@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner S=new Scanner(System.in);
+        int n=S.nextInt();
+        char c[]=new char[n];
+        for(int i=0;i<n;i++)
+        {
+            c[i]=S.next().charAt(0);
+        }
+        int k=S.nextInt();
+        List<Integer> police = new ArrayList<>();
+        List<Integer> thief = new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            if(c[i] == 'P')
+            {
+                police.add(i);
+            }
+            if(c[i] == 'T')
+            {
+                thief.add(i);
+            }
+        }
+        int i=0,j=0,catchh=0;
+        while(i<police.size() && j<thief.size())
+        {
+            if(Math.abs(police.get(i) - thief.get(j)) <=k)
+            {
+                catchh++;
+                i++;j++;
+            }
+            else if(police.get(i)<thief.get(j))
+            {
+                i++;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        System.out.println("Maximum thieves caught: "+catchh);
+        
+    }
+}
