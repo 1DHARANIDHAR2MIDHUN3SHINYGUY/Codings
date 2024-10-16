@@ -22,3 +22,9 @@ public class Main {
      
   }
 }
+
+// using collections:
+        String s="hello world  python ";
+        List<String> w=Arrays.asList(s.trim().split("\\s+"));
+        Collections.reverse(w);
+        System.out.println(String.join(" ",w));
