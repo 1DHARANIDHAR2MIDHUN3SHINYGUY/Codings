@@ -1,0 +1,44 @@
+class Solution {
+   public static int f1(int[] arr, int l, int h, int target) {
+        if (l > h)
+            return -1;  
+        
+        int mid = l+(h - l)/2;
+
+        if (arr[mid] == target) 
+        {
+            int leftOne = f1(arr, l, mid - 1, target);
+            return (leftOne != -1) ? leftOne : mid;
+        }
+        else if (arr[mid] > target)
+            return f1(arr, l, mid - 1, target);  
+        else
+            return f1(arr, mid + 1, h, target);
+    }
+
+   
+    public static int f2(int[] arr, int l, int h, int target) {
+        if (l > h)
+            return -1;
+    
+        int mid = l + (h - l) / 2;
+
+        if (arr[mid] == target) 
+        {
+            int rightOne = f2(arr, mid + 1, h, target);
+            return (rightOne != -1) ? rightOne : mid;
+        } else if (arr[mid] > target)
+            return f2(arr, l, mid - 1, target);  
+        else
+            return f2(arr, mid + 1, h, target);
+    }
+
+   
+    public int[] searchRange(int[] nums, int target) {
+        int[] result = new int[2];
+        result[0] = f1(nums, 0, nums.length - 1, target);  
+        result[1] = f2(nums, 0, nums.length - 1, target);   
+
+        return result;  
+    }
+}
