@@ -1,0 +1,68 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner S=new Scanner(System.in);
+        int n=S.nextInt();//3
+        int arr[][]=new int[n][n];
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                arr[i][j]=S.nextInt();
+            }
+        }
+        //2 7 6
+        //9 5 1
+        //4 3 8
+
+        int actual=0;
+        for(int j=0;j<n;j++)
+        {
+            actual+=arr[0][j];//sum of the first row to check all
+        }
+        for(int i=0;i<n;i++)
+        {
+            int row=0;
+            for(int j=0;j<n;j++)
+            {
+                row+=arr[i][j];//sum of all row
+            }
+            if(row!=actual){
+                System.out.println("no");
+                return;
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            int col=0;
+            for(int j=0;j<n;j++)
+            {
+                col+=arr[j][i];//sum of all column
+            }
+            if(col!=actual){
+                System.out.println("no");
+                return;
+            }
+        }
+        int pd=0;
+        for(int i=0;i<n;i++)
+        {
+            pd+=arr[i][i];//sum of primary diagonal
+        }
+        if(pd!=actual)
+            System.out.println("no");
+        int sd=0; 
+        for(int i=0;i<n;i++)
+        {
+            sd+=arr[i][n-i-1];//sum of secondary diagonal
+        }
+        if(sd!=actual)
+            System.out.println("no");
+        
+        System.out.println("yes");//if all satisfied it prints Yes
+        
+    }
+}
