@@ -1,0 +1,48 @@
+4 - vertices
+
+4 - edges
+
+yes -> directed
+
+1 2 6
+
+2 3 7
+
+3 4 8
+
+2 4 9
+
+import java.io.*; 
+import java.util.*; 
+ 
+public class Solution { 
+ 
+    public static void main(String[] args) { 
+        Scanner z=new Scanner(System.in); 
+        int v=z.nextInt(); 
+        int e=z.nextInt(); 
+        int a[][]=new int[v][v]; 
+        String d=z.next(); 
+        for(int i=0;i<e;i++) 
+        { 
+            int st=z.nextInt(); 
+            int end=z.nextInt(); 
+            int w=z.nextInt(); 
+            a[st-1][end-1]=w; 
+            if(d.equals("no")) 
+                a[end-1][st-1]=w; 
+            
+              
+        } 
+        System.out.println("Adjacency Matrix Representation:"); 
+        for(int i=0;i<v;i++) 
+        { 
+            for(int j=0;j<v;j++) 
+            { 
+                System.out.print(a[i][j]+" "); 
+            }      
+            System.out.println(); 
+        } 
+             
+    } 
+}
