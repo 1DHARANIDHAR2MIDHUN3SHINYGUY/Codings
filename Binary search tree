@@ -1,0 +1,141 @@
+import java.util.*;
+
+public class Main {
+  
+  class node
+  {
+    int data;
+    node left;
+    node right;
+    node(int d)
+    {
+      data=d;
+    }
+  }
+  
+  node ins(int d,node root)//insert the element as per binary tree
+  {
+    if(root==null)
+        return new node(d);
+    else if(root.data<d)
+      root.right = ins(d,root.right);
+    else if(root.data>=d)
+      root.left=ins(d,root.left);
+    return root;
+  }
+    boolean search(int t,node root)//for search a element
+    {
+      if(root==null)
+        return false;
+      if(root.data==t)
+        return true;
+      else if(t>root.data)
+        return search(t,root.right);
+      else
+        return search(t,root.left);
+        
+    }
+    void display(node root)//print the binary tree
+    {
+      if(root==null)
+        return;
+      display(root.left);
+      System.out.print(root.data+" ");
+      display(root.right);
+    }
+    // void inorder(node root)//inorder traversal
+    // {
+    //   if(root==null)
+    //     return;
+    //   inorder(root.left);
+    //   System.out.print(root.data+" ");
+    //   inorder(root.right);
+    // }
+    
+    // void preorder(node root)//preorder traversal
+    // {
+    //   if(root==null)
+    //     return;
+    //   System.out.print(root.data+" ");
+    //   preorder(root.left);
+    //   preorder(root.right);
+    // }
+    
+     // void postorder(node root)//postorder traversal
+    // {
+    //   if(root==null)
+    //     return;
+    //   postorder(root.left);
+    //   postorder(root.right);
+    //   System.out.print(root.data+" ");
+    // }
+    
+    node del(int data,node root)//delete a element
+    {
+      if(root==null)
+        return null;
+      else if(root.data<data)
+      {
+        root.right=del(data,root.right);
+        return root;
+      }
+      else if(root.data>data)
+      {
+        root.left=del(data,root.left);
+        return root;
+      }
+      else
+      {
+        if(root.left==null && root.right == null)
+          return null;
+        else if(root.left ==null)
+          return root.right;
+        else if(root.right == null)
+          return root.left;
+        else
+        {
+          node t=root.right;
+          while(t.left!=null)
+            t=t.left;
+          root.data=t.data;
+          root.right=del(t.data,root.right);
+          return root;
+        }
+      }
+    }
+    
+    
+      
+    public static void main(String[] args) {
+      Main o=new Main();
+      Scanner z=new Scanner(System.in);
+      node root=null;
+      while(z.hasNext())
+      {
+        int data=z.nextInt();
+        root=o.ins(data,root);// 10 7 17 4 19 20 16 5 5
+      }
+      o.display(root);//4 5 5 7 10 16 17 19 20
+      // System.out.println();
+      // o.inorder(root);
+      // System.out.println();
+      // o.preorder(root);
+      // System.out.println();
+      // o.postorder(root);
+      // System.out.println();
+      
+      int t=176;
+      if(o.search(t,root))
+        System.out.print("found");
+      else
+        System.out.print("Not found");//Not found
+        
+      o.del(5,root);
+      System.out.println();
+      o.display(root);//4 5 7 10 16 17 19 20 
+      
+      
+      
+  }
+}
+
