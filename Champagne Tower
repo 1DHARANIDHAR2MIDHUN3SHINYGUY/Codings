@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      int poured = 2, query_row = 1, query_glass = 1;
+      double dp[][]=new double[101][101];
+      dp[0][0] = poured;//ususally poured water must store in 1st 
+        
+      for(int i=0;i<=query_row;i++)
+      {
+          for(int j=0;j<=i;j++)
+          {
+              if(dp[i][j]>=1)//check 1 glass contain 1 water
+              {
+                  double overflow = (dp[i][j]-1.0);//one glass contain 1 water
+                  double left = overflow/2.0;
+                  double right = overflow/2.0;
+
+                  dp[i+1][j]+= left;//left glass
+                  dp[i+1][j+1]+= right;.//right glass
+                  dp[i][j] = 1;//current glass
+              }
+          }
+      }
+      System.out.println(dp[query_row][query_glass]);
+
+  }
+}
