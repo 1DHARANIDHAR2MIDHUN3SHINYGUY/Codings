@@ -1,0 +1,43 @@
+import java.util.*;
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        HashSet<String> set = new HashSet<>();
+        for(String email:emails)
+        {
+            //split
+            int atPos = email.indexOf('@');
+            String localName = email.substring(0,atPos);
+            String domainName = email.substring(atPos);
+            //dotremoving
+            localName = localName.replaceAll("\\.","");
+            if(localName.contains("+"))
+            {
+                int plusPos = localName.indexOf('+');
+                localName = localName.substring(0,plusPos);
+
+            }
+            String newMail = localName+domainName;
+            set.add(newMail);
+
+        }
+        return set.size();
+        
+        
+    }
+    
+        public static void main(String[] args) {
+        // Test input
+        String[] emails = {
+            "test.email+alex@leetcode.com", 
+            "test.e.mail+bob.cathy@leetcode.com", 
+            "testemail+david@lee.tcode.com"
+        };
+
+        // Creating an instance of Solution and calling numUniqueEmails method
+        Solution sol = new Solution();
+        int result = sol.numUniqueEmails(emails);
+
+        // Print the result
+        System.out.println("Number of unique emails: " + result);//2
+    }
+}
