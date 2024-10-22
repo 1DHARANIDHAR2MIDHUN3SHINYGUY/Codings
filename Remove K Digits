@@ -1,0 +1,83 @@
+class Solution {
+    public String removeKdigits(String num, int k) {
+        Stack<Character> s = new Stack<>();
+        int removed = 0;
+
+        // Traverse through the characters in the number string
+        for (int i = 0; i < num.length(); i++) {
+            char c = num.charAt(i);
+
+            // While condition to remove digits when necessary
+            while (removed < k && !s.isEmpty() && s.peek() > c) {
+                s.pop();
+                removed += 1;
+            }
+            s.push(c);
+        }
+
+        // Remove any remaining digits
+        while (removed < k && !s.isEmpty()) {
+            s.pop();
+            removed++;
+        }
+
+        // Build the result string from the stack
+        StringBuilder result = new StringBuilder();
+        while (!s.isEmpty()) {
+            result.insert(0, s.pop());
+        }
+
+        // Remove leading zeros
+        int nonZeroIndex = 0;
+        while (nonZeroIndex < result.length() && result.charAt(nonZeroIndex) == '0') {
+            nonZeroIndex++;
+        }
+        
+        result = new StringBuilder(result.substring(nonZeroIndex));
+
+        // If result is empty, return "0"
+        if (result.length() == 0) {
+            return "0";
+        }
+
+        return result.toString();
+    }
+}
+
+
+//
+
+class Solution {
+    public String removeKdigits(String num, int k) {
+        int n = num.length();
+        // Early return if we need to remove all digits
+        if (k == n) return "0";
+
+        // Use a StringBuilder as a stack for efficiency
+        StringBuilder stack = new StringBuilder();
+
+        for (int i = 0; i < num.length(); i++) {
+            char c = num.charAt(i);
+            
+            // Remove characters from the stack while the current character is smaller than the stack's top
+            while (k > 0 && stack.length() > 0 && stack.charAt(stack.length() - 1) > c) {
+                stack.deleteCharAt(stack.length() - 1);
+                k--;
+            }
+            
+            // Avoid leading zeros
+            if (stack.length() != 0 || c != '0') {
+                stack.append(c);
+            }
+        }
+
+        // If there are still characters to remove after traversing the number
+        while (k > 0 && stack.length() > 0) {
+            stack.deleteCharAt(stack.length() - 1);
+            k--;
+        }
+
+        // If the stack is empty, return "0", otherwise return the result
+        return stack.length() == 0 ? "0" : stack.toString();
+    }
+}
