@@ -1,0 +1,42 @@
+Given N Rupees. A liter plastic bottle of milk costs R1 Rupees and a liter of the glass bottle of milk costs R2 Rupees. 
+But the empty glass bottle after buying can be exchanged for R3 Rupees. Find the maximum liters of milk which can be bought with N Rupees (either plastic or glass milk).
+
+Example-1
+
+Input
+
+10 Vale of N
+
+11-Value of R1 ie. price of plastic bottle
+
+9-Value of R2 ie. price of glass bottle
+
+8-Value of R3 Le, price of empty glass bottle
+
+Output
+
+2
+
+code:
+
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();//10 Total money available.
+        int R1 = sc.nextInt();//11 Price of 1 liter of milk in a plastic bottle.
+        int R2 = sc.nextInt(); //9 Price of 1 liter of milk in a glass bottle.
+        int R3 = sc.nextInt(); //8 Refundable price of an empty glass bottle.
+        int plasticLiters = N / R1;//The price of a plastic bottle is 11, but you only have 10 Rupees.if it price 10 rupee is 11 literally it becomes ans 1 ,then you can buy 1 litre
+        
+        // int GlassPrice = R2 - R3;
+        int glassLiters = 0; 
+        while (N >= R2) {
+            glassLiters++;
+            N -= (R2 - R3); //10 - 9 + 8 = 9 Rupees.again buy another bottle for 9 Rupees for this input
+        }
+        int maxLiters = Math.max(plasticLiters, glassLiters);
+        System.out.println(maxLiters);
+    }
+}
