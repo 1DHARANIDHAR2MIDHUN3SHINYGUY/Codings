@@ -1,0 +1,50 @@
+class Solution {
+    Set<String> visited = new HashSet<>();
+    int possibleWays = 0;
+    public void dfs(int[][] grid, int i,int j, int needed) {
+
+        if(i < 0 || j < 0 || i >= grid.length || j >= grid[i].length) 
+            return;
+
+        if(visited.contains(i+":"+j))
+            return;
+
+        if(grid[i][j] == 2 && needed == 1) 
+            possibleWays+=1;
+
+        if(grid[i][j] == -1 || needed<=0)
+            return;
+
+        visited.add(i+":"+j);
+
+        dfs(grid,i,j + 1, needed-1);
+        dfs(grid,i + 1, j, needed-1); 
+        dfs(grid,i,j - 1, needed-1); 
+        dfs(grid,i-1,j, needed-1);
+
+        visited.remove(i+":"+j);
+
+    }
+    public int uniquePathsIII(int[][] grid) {
+        int needed = 0;
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[0].length;j++)
+            {
+                if(grid[i][j]!=-1)
+                    needed++;
+            }
+        }
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[0].length;j++)
+            {
+                if(grid[i][j]==1)
+                    dfs(grid,i,j,needed);
+            }
+        }
+        return possibleWays;
+
+        
+    }
+}
