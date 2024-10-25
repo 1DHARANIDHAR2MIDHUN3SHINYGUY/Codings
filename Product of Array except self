@@ -8,7 +8,7 @@ public class Main {
         int[] result = sol.productExceptSelf(nums);  // Call the method
         
         // Print the output array
-        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.toString(result)); Output: [24,12,8,6]
     }
 }
 
