@@ -1,0 +1,28 @@
+class Solution {
+    public int dfs(int i, int j, int[][] dp, int m, int n) {
+        // Check if out of bounds
+        if (i < 0 || j < 0 || i >= m || j >= n)
+            return 0;
+
+        // Check if we've reached the bottom-right corner
+        if (i == m - 1 && j == n - 1)
+            return 1;
+
+        // If we've already calculated the number of paths from this cell, return it
+        if (dp[i][j] > 0)
+            return dp[i][j];
+
+        // Recursive calls for right and down movements
+        int right = dfs(i, j + 1, dp, m, n);
+        int down = dfs(i + 1, j, dp, m, n);
+
+        // Store result in dp array and return it
+        dp[i][j] = right + down;
+        return dp[i][j];
+    }
+
+    public int uniquePaths(int m, int n) {
+        int[][] dp = new int[m][n];
+        return dfs(0, 0, dp, m, n);
+    }
+}
